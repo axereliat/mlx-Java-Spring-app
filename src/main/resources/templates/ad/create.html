@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<th:block th:include="common/head"></th:block>
+
+<body>
+<th:block th:include="common/header"></th:block>
+
+<div class="jumbotron">
+    <form action="/ads/create" method="post">
+        <div class="form-group">
+            <label class="custom-control-label" for="title">Title: </label>
+            <input type="text" id="title" name="title" class="form-control" placeholder="Title..." th:value="${title}"/>
+        </div>
+        <th:block th:each="category : ${categories}">
+
+        </th:block>
+    </form>
+</div>
+
+<th:block th:include="common/footer"></th:block>
+</body>
+</html>
