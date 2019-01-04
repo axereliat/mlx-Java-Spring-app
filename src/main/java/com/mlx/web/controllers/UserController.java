@@ -42,24 +42,42 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerProccess(Model model, @Valid @ModelAttribute UserRegisterBindingModel bindingModel, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String registerProcess(Model model, @Valid @ModelAttribute UserRegisterBindingModel bindingModel, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         List<String> errors = bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList());
         if (!bindingModel.getPassword().equals(bindingModel.getConfirmPassword())) {
             model.addAttribute("username", bindingModel.getUsername());
             model.addAttribute("birthdate", bindingModel.getBirthdate());
+            model.addAttribute("email", bindingModel.getEmail());
+            model.addAttribute("phoneNumber", bindingModel.getPhoneNumber());
+            model.addAttribute("livingPlace", bindingModel.getLivingPlace());
             model.addAttribute("error", "Passwords do not match.");
             return "user/register";
         }
         if (errors.size() > 0) {
             model.addAttribute("username", bindingModel.getUsername());
             model.addAttribute("birthdate", bindingModel.getBirthdate());
+            model.addAttribute("email", bindingModel.getEmail());
+            model.addAttribute("phoneNumber", bindingModel.getPhoneNumber());
+            model.addAttribute("livingPlace", bindingModel.getLivingPlace());
             model.addAttribute("error", errors.get(errors.size() - 1));
             return "user/register";
         }
         if (this.userService.existsUserByUsername(bindingModel.getUsername())) {
             model.addAttribute("username", bindingModel.getUsername());
             model.addAttribute("birthdate", bindingModel.getBirthdate());
+            model.addAttribute("email", bindingModel.getEmail());
+            model.addAttribute("phoneNumber", bindingModel.getPhoneNumber());
+            model.addAttribute("livingPlace", bindingModel.getLivingPlace());
             model.addAttribute("error", "Username exists.");
+            return "user/register";
+        }
+        if (this.userService.existsUserByEmail(bindingModel.getEmail())) {
+            model.addAttribute("username", bindingModel.getUsername());
+            model.addAttribute("birthdate", bindingModel.getBirthdate());
+            model.addAttribute("email", bindingModel.getEmail());
+            model.addAttribute("phoneNumber", bindingModel.getPhoneNumber());
+            model.addAttribute("livingPlace", bindingModel.getLivingPlace());
+            model.addAttribute("error", "Email exists.");
             return "user/register";
         }
         this.userService.register(bindingModel);

@@ -36,7 +36,7 @@ public class Category {
         this.name = name;
     }
 
-    @ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public Set<Ad> getAds() {
         return ads;
     }

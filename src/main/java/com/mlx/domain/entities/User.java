@@ -24,6 +24,14 @@ public class User implements UserDetails {
 
     private Set<Role> authorities;
 
+    private Set<Ad> ads;
+
+    private String email;
+
+    private String livingPlace;
+
+    private String phoneNumber;
+
     private boolean isAccountNonExpired;
 
     private boolean isAccountNonLocked;
@@ -133,6 +141,42 @@ public class User implements UserDetails {
 
     public void setEnabled(boolean enabled) {
         isEnabled = enabled;
+    }
+
+    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
+    public Set<Ad> getAds() {
+        return ads;
+    }
+
+    public void setAds(Set<Ad> ads) {
+        this.ads = ads;
+    }
+
+    @Column(unique = true)
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Column(name = "living_place")
+    public String getLivingPlace() {
+        return livingPlace;
+    }
+
+    public void setLivingPlace(String livingPlace) {
+        this.livingPlace = livingPlace;
+    }
+
+    @Column(name = "phone_number")
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     @Transient

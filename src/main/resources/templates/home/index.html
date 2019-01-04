@@ -6,7 +6,20 @@
 <th:block th:include="common/header"></th:block>
 
 <div class="jumbotron">
-    <p>Hello world</p>
+    <ul class="list-group">
+        <th:block th:each="ad : ${ads}">
+            <li class="list-group-item">
+                <div class="img-responsive float-left mr-2">
+                    <img th:src="${ad.photos.stream().findFirst().get().url}" width="100" alt="Ad photo"/>
+                </div>
+                <strong class="float-right" th:text="${ad.price + '$'}"></strong>
+                <div>
+                    <h4 th:text="${ad.title}"></h4>
+                    <p th:text="${#strings.arrayJoin(ad.getCategoryNames(), ', ')}"></p>
+                </div>
+            </li>
+        </th:block>
+    </ul>
 </div>
 
 <th:block th:include="common/footer"></th:block>

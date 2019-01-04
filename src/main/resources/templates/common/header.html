@@ -4,8 +4,8 @@
         <a class="p-2 text-dark" href="/">Home</a>
         <a class="p-2 text-dark" href="/about">About</a>
         <a class="p-2 text-dark" href="/ads/create" th:if="${#request.userPrincipal != null}">Submit an Ad</a>
+        <a class="btn btn-outline-primary" href="/register" th:if="${#request.userPrincipal == null}">Sign up</a>
+        <a class="btn btn-outline-primary" href="/login" th:if="${#request.userPrincipal == null}">Sign in</a>
+        <a class="btn btn-outline-danger" href="/logout" th:if="${#request.userPrincipal != null}">Sign out</a>
     </nav>
-    <a class="btn btn-outline-primary" href="/register" th:if="${#request.userPrincipal == null}">Sign up</a>
-    <a class="btn btn-outline-primary" href="/login" th:if="${#request.userPrincipal == null}">Sign in</a>
-    <a class="btn btn-outline-danger" href="/logout" th:if="${#request.userPrincipal != null}">Logout</a>
 </div>

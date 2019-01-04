@@ -8,4 +8,6 @@ public interface UserService extends UserDetailsService {
     void register(UserRegisterBindingModel bindingModel);
 
     boolean existsUserByUsername(String username);
+
+    boolean existsUserByEmail(String email);
 }

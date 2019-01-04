@@ -19,11 +19,9 @@ public class Ad {
 
     private String description;
 
-    private String place;
-
-    private String phoneNumber;
-
     private Set<Photo> photos;
+
+    private User author;
 
     public Ad() {
         this.categories = new HashSet<>();
@@ -47,7 +45,7 @@ public class Ad {
         this.title = title;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "ads_categories",
             joinColumns = @JoinColumn(name = "ad_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
@@ -75,23 +73,6 @@ public class Ad {
         this.description = description;
     }
 
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
-    }
-
-    @Column(name = "phone_number")
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     @OneToMany(mappedBy = "ad", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public Set<Photo> getPhotos() {
         return photos;
@@ -99,5 +80,25 @@ public class Ad {
 
     public void setPhotos(Set<Photo> photos) {
         this.photos = photos;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "author_id", referencedColumnName = "id")
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
+    @Transient
+    public void addCategory(Category category) {
+        this.categories.add(category);
+    }
+
+    @Transient
+    public String[] getCategoryNames() {
+        return this.categories.stream().map(Category::getName).toArray(String[]::new);
     }
 }
