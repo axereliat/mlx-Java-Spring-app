@@ -1,8 +1,20 @@
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
     <h5 class="my-0 mr-md-auto font-weight-normal">MLX</h5>
+    <span class="my-0 mr-md-auto font-weight-normal" th:if="${#request.userPrincipal != null}"
+          th:text="|Welcome, ${currentUser.username}|"></span>
     <nav class="my-2 my-md-0 mr-md-3">
         <a class="p-2 text-dark" href="/">Home</a>
         <a class="p-2 text-dark" href="/about">About</a>
+        <th:block th:if="${currentUser.isAdmin()}">
+            <a class="pb-2 btn btn-link text-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+                ADMIN
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="/admin/categories">Categories</a>
+                <a class="dropdown-item" href="/admin/users">Users</a>
+            </div>
+        </th:block>
         <a class="p-2 text-dark" href="/ads/create" th:if="${#request.userPrincipal != null}">Submit an Ad</a>
         <a class="btn btn-outline-primary" href="/register" th:if="${#request.userPrincipal == null}">Sign up</a>
         <a class="btn btn-outline-primary" href="/login" th:if="${#request.userPrincipal == null}">Sign in</a>

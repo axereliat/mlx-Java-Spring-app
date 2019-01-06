@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<th:block th:include="common/head"></th:block>
+
+<body>
+<th:block th:include="common/header"></th:block>
+
+<div class="jumbotron">
+    <h2 class="text-center">Edit Category</h2>
+    <form th:action="@{/admin/categories/edit/{id}(id=${category.id})}" method="post">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" class="form-control" id="name" placeholder="Name..." th:value="${category.name}" required>
+        </div>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+    </form>
+</div>
+
+<th:block th:include="common/footer"></th:block>
+</body>
+</html>

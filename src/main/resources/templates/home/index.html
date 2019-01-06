@@ -22,10 +22,14 @@
                 </div>
                 <strong class="float-right" th:text="${ad.price + '$'}"></strong>
                 <div>
-                    <h4><a th:text="${ad.title}" th:href="@{/ads/details/{id}(id=${ad.id})}"></h4>
-                    </a>
+                    <h4><a th:text="${ad.title}" th:href="@{/ads/details/{id}(id=${ad.id})}"></a></h4>
                     <p th:text="${#strings.arrayJoin(ad.getCategoryNames(), ', ')}"></p>
                     <i class="fas fa-map-marker-alt"></i> <span th:text="${ad.author.livingPlace}"></span>
+                </div>
+                <!--/*@thymesVar id="currentUser" type="com.mlx.domain.entities.User"*/-->
+                <div class="float-right" th:if="${currentUser.id == ad.author.id}">
+                    <a th:href="@{/ads/edit/{id}(id=${ad.id})}" class="btn btn-secondary"><i class="fas fa-edit"></i> Edit</a>
+                    <a href="#" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</a>
                 </div>
             </li>
         </th:block>
