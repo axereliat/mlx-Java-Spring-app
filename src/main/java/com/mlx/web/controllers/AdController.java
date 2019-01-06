@@ -1,5 +1,6 @@
 package com.mlx.web.controllers;
 
+import com.mlx.domain.entities.Ad;
 import com.mlx.domain.models.binding.AdSubmitBindingModel;
 import com.mlx.service.AdService;
 import com.mlx.service.CategoryService;
@@ -65,5 +66,14 @@ public class AdController {
         map.put("message", "Your ad was successfully submitted.");
 
         return map;
+    }
+
+    @GetMapping("/details/{id}")
+    public String details(Model model, @PathVariable Integer id) {
+        Ad ad = this.adService.findById(id);
+
+        model.addAttribute("ad", ad);
+
+        return "ad/details";
     }
 }

@@ -7,6 +7,14 @@
 
 <div class="jumbotron">
     <ul class="list-group">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <th:block th:each="page : ${#numbers.sequence(1, pages + 1)}">
+                    <li th:class="${page == currentPage ? 'page-item active' : 'page-item'}"><a class="page-link" th:href="|/?page=${page}|" th:text="${page}"></a></li>
+                </th:block>
+            </ul>
+        </nav>
+
         <th:block th:each="ad : ${ads}">
             <li class="list-group-item">
                 <div class="img-responsive float-left mr-2">
@@ -14,8 +22,10 @@
                 </div>
                 <strong class="float-right" th:text="${ad.price + '$'}"></strong>
                 <div>
-                    <h4 th:text="${ad.title}"></h4>
+                    <h4><a th:text="${ad.title}" th:href="@{/ads/details/{id}(id=${ad.id})}"></h4>
+                    </a>
                     <p th:text="${#strings.arrayJoin(ad.getCategoryNames(), ', ')}"></p>
+                    <i class="fas fa-map-marker-alt"></i> <span th:text="${ad.author.livingPlace}"></span>
                 </div>
             </li>
         </th:block>

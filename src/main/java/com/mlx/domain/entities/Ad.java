@@ -65,6 +65,7 @@ public class Ad {
         this.price = price;
     }
 
+    @Column(columnDefinition = "TEXT")
     public String getDescription() {
         return description;
     }

@@ -11,4 +11,6 @@ public interface AdService {
     void create(AdSubmitBindingModel bindingModel, Principal principal);
 
     List<Ad> findAll();
+
+    Ad findById(Integer id);
 }

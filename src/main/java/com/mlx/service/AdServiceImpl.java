@@ -3,6 +3,7 @@ package com.mlx.service;
 import com.mlx.domain.entities.Ad;
 import com.mlx.domain.entities.Category;
 import com.mlx.domain.entities.Photo;
+import com.mlx.domain.exceptions.ResourceNotFoundException;
 import com.mlx.domain.models.binding.AdSubmitBindingModel;
 import com.mlx.repository.AdRepository;
 import com.mlx.repository.CategoryRepository;
@@ -76,5 +77,14 @@ public class AdServiceImpl implements AdService {
     @Override
     public List<Ad> findAll() {
         return this.adRepository.findAll();
+    }
+
+    @Override
+    public Ad findById(Integer id) {
+        Optional<Ad> adOptional = this.adRepository.findById(id);
+        if (!adOptional.isPresent()) {
+            throw new ResourceNotFoundException();
+        }
+        return adOptional.get();
     }
 }
