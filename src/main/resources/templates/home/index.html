@@ -28,8 +28,8 @@
                 </div>
                 <!--/*@thymesVar id="currentUser" type="com.mlx.domain.entities.User"*/-->
                 <div class="float-right" th:if="${currentUser.id == ad.author.id}">
-                    <a th:href="@{/ads/edit/{id}(id=${ad.id})}" class="btn btn-secondary"><i class="fas fa-edit"></i> Edit</a>
-                    <a href="#" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</a>
+                    <a href="#" onclick="alert('Not implemented yet...')" class="btn btn-secondary"><i class="fas fa-edit"></i> Edit</a>
+                    <a href="#" onclick="alert('Not implemented yet...')" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</a>
                 </div>
             </li>
         </th:block>

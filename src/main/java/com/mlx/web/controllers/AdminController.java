@@ -2,6 +2,7 @@ package com.mlx.web.controllers;
 
 import com.mlx.domain.models.binding.CategoryCreateBindingModel;
 import com.mlx.service.CategoryService;
+import com.mlx.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Controller;
@@ -20,9 +21,12 @@ public class AdminController {
 
     private final CategoryService categoryService;
 
+    private final UserService userService;
+
     @Autowired
-    public AdminController(CategoryService categoryService) {
+    public AdminController(CategoryService categoryService, UserService userService) {
         this.categoryService = categoryService;
+        this.userService = userService;
     }
 
     @GetMapping("/categories")
@@ -76,5 +80,12 @@ public class AdminController {
         this.categoryService.edit(bindingModel, id);
         redirectAttributes.addFlashAttribute("success", "Category was successfully edited");
         return "redirect:/admin/categories";
+    }
+
+    @GetMapping("/users")
+    public String users(Model model) {
+        model.addAttribute("users", this.userService.findAll());
+
+        return "admin/users/list";
     }
 }

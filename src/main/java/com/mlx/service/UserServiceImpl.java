@@ -17,6 +17,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -83,6 +84,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByUsername(String username) {
         return this.userRepository.findByUsername(username);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return this.userRepository.findAll();
     }
 
     @Override

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<th:block th:include="common/head"></th:block>
+
+<body>
+<th:block th:include="common/header"></th:block>
+
+<div class="jumbotron">
+    <h2 class="text-center">All Users</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Username</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <th scope="row" th:text="${user.id}"></th>
+            <td th:text="${user.username}"></td>
+            <td><a th:href="@{/admin/users/edit/{id}(id=${user.id})}" class="btn btn-secondary"><i class="fas fa-edit"></i>Edit</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<th:block th:include="common/footer"></th:block>
+</body>
+</html>
