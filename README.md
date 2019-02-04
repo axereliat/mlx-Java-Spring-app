@@ -4,5 +4,5 @@
 Demo: http://mlx101.herokuapp.com/
 
 Admin credentials:
-  username: mario
+  username: mario <br />
   password: 123
